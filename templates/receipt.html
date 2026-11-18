@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Struk #{{ item.id }} · QGEN POS{% endblock %}
+{% block content %}
+<section class="receipt-wrap">
+  <div class="receipt-actions"><a class="text-link" href="{{ url_for('history') }}">← Kembali</a><button class="button primary" onclick="window.print()">Cetak struk</button></div>
+  <article class="receipt-paper" id="receipt">
+    <div class="receipt-brand"><span class="brand-mark">q</span><b>{{ item.store_name }}</b></div>
+    <p class="receipt-sub">BUKTI PENCATATAN TRANSAKSI</p>
+    <div class="receipt-rule"></div>
+    <div class="receipt-meta"><span>No. transaksi</span><b>#{{ item.id }}</b></div>
+    <div class="receipt-meta"><span>Tanggal</span><b>{{ item.created_at }}</b></div>
+    <div class="receipt-rule"></div>
+    <div class="receipt-line"><span>{{ item.title }}</span><b>Rp {{ item.amount|rupiah }}</b></div>
+    <div class="receipt-rule"></div>
+    <div class="receipt-meta"><span>Jenis</span><b>{{ 'Pemasukan' if item.type == 'income' else 'Pengeluaran' }}</b></div>
+    <div class="receipt-meta"><span>Metode</span><b>{{ item.method|upper }}</b></div>
+    <div class="receipt-total"><span>Total</span><b>Rp {{ item.amount|rupiah }}</b></div>
+    <p class="receipt-thanks">Terima kasih 🙏<br><small>Dicatat menggunakan QGEN POS</small></p>
+  </article>
+  <p class="tiny muted center">Struk ini merupakan bukti pencatatan pada QGEN POS, bukan bukti penyelesaian pembayaran dari bank atau penyedia QRIS.</p>
+</section>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Recovery Key · QGEN POS{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <div class="brand large"><span class="brand-mark">q</span><span>QGEN POS</span></div>
+  <span class="status-pill">Pendaftaran berhasil</span>
+  <h1>Simpan Recovery Key</h1>
+  <p class="muted">Kunci ini digunakan untuk pemulihan akun. Simpan di tempat aman. QGEN POS tidak menampilkannya lagi setelah halaman ini ditutup.</p>
+  <div class="recovery-key" id="recovery-key">{{ recovery }}</div>
+  <button class="button primary full" type="button" data-copy="#recovery-key">Salin Recovery Key</button>
+  <a class="button secondary full" href="{{ url_for('index') }}">Lanjut ke dashboard</a>
+</section>
+{% endblock %}

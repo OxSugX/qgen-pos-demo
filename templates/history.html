@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Riwayat · QGEN POS{% endblock %}
+{% block content %}
+<section class="welcome-row"><div><p class="eyebrow">CATATAN USAHA</p><h1>Riwayat transaksi</h1><p class="muted">Maksimal 500 transaksi terbaru.</p></div></section>
+<div class="transaction-list history-full">
+{% for item in rows %}
+<article class="transaction-row">
+  <span class="transaction-symbol {{ 'income' if item.type == 'income' else 'expense' }}">{{ '↗' if item.type == 'income' else '↘' }}</span>
+  <div class="transaction-info"><b>{{ item.title }}</b><small>{{ item.created_at }} · {{ item.method|upper }}</small></div>
+  <div class="transaction-amount {{ 'text-green' if item.type == 'income' else 'text-red' }}">{{ '+' if item.type == 'income' else '−' }} Rp {{ item.amount|rupiah }}<a href="{{ url_for('receipt', transaction_id=item.id) }}">Struk</a></div>
+</article>
+{% else %}
+<div class="empty-state"><span>▤</span><b>Belum ada transaksi</b><p>Transaksi yang kamu catat akan muncul di sini.</p></div>
+{% endfor %}
+</div>
+{% endblock %}

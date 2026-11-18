@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Daftar' if mode == 'register' else 'Masuk' }} · QGEN POS{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <div class="brand large"><span class="brand-mark">q</span><span>QGEN POS</span></div>
+  <p class="eyebrow">PENGELOLAAN USAHA, LEBIH MUDAH</p>
+  <h1>{{ 'Buat akun baru' if mode == 'register' else 'Selamat datang kembali' }}</h1>
+  <p class="muted">{{ 'Mulai rapikan transaksi tokomu.' if mode == 'register' else 'Masuk untuk melanjutkan aktivitas tokomu.' }}</p>
+  <form method="post" class="form-stack">
+    <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+    <label>Email<input type="email" name="email" placeholder="nama@email.com" autocomplete="email" required></label>
+    <label>PIN 6 angka<input type="password" name="pin" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="••••••" autocomplete="{{ 'new-password' if mode == 'register' else 'current-password' }}" required></label>
+    <button class="button primary full">{{ 'Buat akun' if mode == 'register' else 'Masuk ke QGEN POS' }}</button>
+  </form>
+  <p class="auth-switch">{{ 'Sudah punya akun?' if mode == 'register' else 'Belum punya akun?' }}
+    <a href="{{ url_for('login' if mode == 'register' else 'register') }}">{{ 'Masuk' if mode == 'register' else 'Daftar sekarang' }}</a>
+  </p>
+  <p class="tiny muted">PIN digunakan untuk akses akun. Jangan gunakan PIN yang sama dengan rekening atau kartu bank.</p>
+</section>
+{% endblock %}
