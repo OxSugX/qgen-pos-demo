@@ -35,7 +35,11 @@ app.config.update(
 )
 
 DB_PATH = (
-    Path("/tmp/qgen-demo.db")
+    (
+        Path("/tmp/qgen-demo.db")
+        if os.environ.get("VERCEL") == "1"
+        else Path(__file__).parent / "instance" / "qgen-demo.db"
+    )
     if os.environ.get("QGEN_DEMO") == "1"
     else Path(__file__).parent / "qgen.db"
 )
@@ -643,6 +647,18 @@ MAIN_TEMPLATE = BASE_STYLE + """
   </div>
 </header>
 
+<div style="background:linear-gradient(135deg,#172554,#14532d);border:1px solid #25634a;border-radius:14px;padding:15px 17px;margin:0 0 18px;color:#fff;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">
+    <span style="background:#22c55e;color:#052e16;padding:4px 9px;border-radius:6px;font-size:11px;font-weight:800;">DEMO</span>
+    <strong style="font-size:14px;">QGEN POS V1.0</strong>
+  </div>
+  <p style="font-size:13px;line-height:1.6;margin:0 0 9px;color:#e2e8f0;">
+    Ini adalah versi demonstrasi QGEN POS. Data transaksi dan grafik yang ditampilkan merupakan data contoh, bukan transaksi nyata.
+  </p>
+  <a href="https://github.com/OxSugX/qgen-pos" target="_blank" rel="noopener" style="color:#86efac;font-size:12px;font-weight:700;text-decoration:none;">
+    Dikembangkan oleh OxSugX · Lihat GitHub →
+  </a>
+</div>
 <div class="container">
   <p class="greeting">Selamat datang kembali 👋</p>
 
