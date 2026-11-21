@@ -49,8 +49,4 @@ Buka browser:
 
 `http://127.0.0.1:5000`
 
-## Proyek
-
-GitHub: https://github.com/OxSugX/qgen-pos
-
 Developer: [OxSugX](https://github.com/OxSugX)
